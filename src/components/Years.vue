@@ -4,7 +4,7 @@
         <h1 class="sectionName">How Many Years?</h1>
 
         <div class="alignCenter">
-            <div class="optionBox">
+            <div class="optionBox" v-bind:class="{ 'selected' : oneSelected }">
                 <div>
                     <div class="title">1 Year</div>
                 </div>
@@ -16,11 +16,11 @@
                 <div>
                     <div class="price">$Free</div>
                     <div class="description">as default</div>
-                    <div class="selectedButton">Select</div>
+                    <div class="selectedButton" v-on:click="selectedOne">Select</div>
                 </div>
             </div>
 
-            <div class="optionBox">
+            <div class="optionBox" v-bind:class="{ 'selected' : twoSelected }">
                 <div>
                     <div class="title">2 Years</div>
                 </div>
@@ -32,11 +32,11 @@
                 <div>
                     <div class="price">+ $74</div>
                     <div class="description">per license</div>
-                    <div class="selectedButton">Select</div>
+                    <div class="selectedButton" v-on:click="selectedTwo">Select</div>
                 </div>
             </div>
 
-            <div class="optionBox">
+            <div class="optionBox" v-bind:class="{ 'selected' : threeSelected }">
                 <div>
                     <div class="title">3 Years</div>
                 </div>
@@ -48,7 +48,7 @@
                 <div>
                     <div class="price">+ $149</div>
                     <div class="description">per license</div>
-                    <div class="selectedButton">Select</div>
+                    <div class="selectedButton" v-on:click="selectedThree">Select</div>
                 </div>
             </div>
         </div>
@@ -61,11 +61,50 @@
 
 <script>
 export default {
-    name: "Years"
+    name: "Years",
+
+    data: function() {
+        return {
+            oneSelected: false,
+            twoSelected: false,
+            threeSelected: false,
+        }
+    },
+
+
+    methods: {
+        selectedOne: function() {
+            if (this.oneSelected === false) {
+                this.oneSelected = true;
+            } else {
+                this.oneSelected = false;
+            }
+        },
+
+        selectedTwo: function() {
+            if (this.twoSelected === false) {
+                this.twoSelected = true;
+            } else {
+                this.twoSelected = false;
+            }
+        },
+
+        selectedThree: function() {
+            if (this.threeSelected === false) {
+                this.threeSelected = true;
+            } else {
+                this.threeSelected = false;
+            }
+        },
+    }
 }
 </script>
 
 <style scoped>
+    .selected {
+        border: 2px solid #2F3241!important;
+    }
+
     .pageWrapper {
         display: flex;
         align-items: center;

@@ -4,8 +4,8 @@
             <div class="logo"><i class="fab fa-cloudversify"></i></div>
             <ul class="nav">
                 <li><a href="">Home</a></li>
-                <li><a href="">Info</a></li>
                 <li><a href="">Contact</a></li>
+                <li><a href="Summary.vue#summaryBox">Checkout</a></li>
             </ul>
         </div>
     </div>

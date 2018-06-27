@@ -10,7 +10,7 @@
         <p></p>
 
         <div class="alignCenter">
-            <div class="optionBox">
+            <div class="optionBox" v-bind:class="{ 'selected' : need }">
                 <div>
                     <div class="title">I would like Priority Support</div>
                 </div>
@@ -26,11 +26,11 @@
                 <div>
                     <div class="price">$149</div>
                     <div class="description">Per User Per Year</div>
-                    <div class="selectedButton">Select</div>
+                    <div class="selectedButton" v-on:click="selectedNeed">Select</div>
                 </div>
             </div>
 
-            <div class="optionBox">
+            <div class="optionBox" v-bind:class="{ 'selected' : needNot }">
                 <div>
                     <div class="title">I don't need Priority Support</div>
                 </div>
@@ -46,7 +46,7 @@
                 <div>
                     <div class="price">$0</div>
                     <div class="description">Per User Per Year</div>
-                    <div class="selectedButton">Select</div>
+                    <div class="selectedButton" v-on:click="selectedNot">Select</div>
                 </div>
             </div>
         </div>
@@ -68,11 +68,41 @@
 
 <script>
 export default {
-    name: "Support"
+    name: "Support",
+
+    data: function() {
+        return {
+            need: false,
+            needNot: false,
+        }
+    },
+
+
+    methods: {
+        selectedNeed: function() {
+            if (this.need === false) {
+                this.need = true;
+            } else {
+                this.need = false;
+            }
+        },
+
+        selectedNot: function() {
+            if (this.needNot === false) {
+                this.needNot = true;
+            } else {
+                this.needNot = false;
+            }
+        },
+    }
 }
 </script>
 
 <style scoped>
+    .selected {
+        border: 2px solid #2F3241!important;
+    }
+
     .pageWrapper {
         display: flex;
         align-items: center;

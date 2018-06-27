@@ -7,14 +7,14 @@
             <div>
                 <div class="title">Number of Users:</div>
                 <div id="input">
-                    <div id="subtract">-</div>
-                    <div id="counter">1</div>
-                    <div id="add">+</div>
+                    <div id="subtract" v-on:click="decrementUsers">-</div>
+                    <div id="counter">{{ userCount }}</div>
+                    <div id="add" v-on:click="incrementUsers">+</div>
                 </div>
             </div>
-            <div>
-                <div class="title">Save <span id="save">5%</span> when you upgrade to <span id="numOfLicence">6 licences</span></div>
-                <div id="upgrade">Upgrade to 6 licences</div>
+            <div id="discount">
+                <div id="title2">Save <span id="save">10%</span> when you upgrade to <span id="numOfLicense">6 licenses</span></div>
+                <div id="upgrade" v-on:click="upgradeLicense">Upgrade to 6 licenses</div>
             </div>
         </div>
 
@@ -26,7 +26,45 @@
 
 <script>
 export default {
-    name: "Users"
+    name: "Users",
+
+    data: function() {
+        return {
+            userCount: 1,
+        }
+    },
+
+    methods: {
+
+        upgradeLicense: function() {
+            this.userCount = 6;
+            if (this.userCount >= 6) {
+                document.getElementById('upgrade').style.display = "none";
+                document.getElementById('title2').innerHTML = "You now have 10% discount!";
+            }
+        },
+
+        incrementUsers: function() {
+            this.userCount++;
+            if (this.userCount >= 6) {
+                document.getElementById('upgrade').style.display = "none";
+                document.getElementById('title2').innerHTML = "You now have 10% discount!";
+            }
+        },
+
+        decrementUsers: function() {
+            if (this.userCount < 2) {
+                return;
+            } else {
+                this.userCount--;
+            }
+
+            if (this.userCount < 6) {
+                document.getElementById('upgrade').style.display = "block";
+                document.getElementById('title2').innerHTML = 'Save <span id="save">10%</span> when you upgrade to <span id="numOfLicence">6 licences</span>';
+            }
+        }
+    },
 }
 </script>
 
@@ -49,6 +87,10 @@ export default {
     }
 
     .title {
+        font-size: 20px;
+    }
+
+    #title2 {
         font-size: 20px;
     }
 
@@ -85,7 +127,7 @@ export default {
         font-size: 30px;
     }
 
-    #numOfLicence {
+    #numOfLicense {
         font-weight: bold;
     }
 

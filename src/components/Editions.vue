@@ -4,7 +4,7 @@
         <h1 class="sectionName">Which Edition?</h1>
 
         <div class="alignCenter">
-            <div class="optionBox">
+            <div class="optionBox" v-bind:class="{ 'selected' : standardSelected }">
                 <div>
                     <div class="title">Standard</div>
                 </div>
@@ -16,11 +16,11 @@
                 <div>
                     <div class="price">$150</div>
                     <div class="description">Per User Per Year</div>
-                    <div class="selectedButton">Select</div>
+                    <div class="selectedButton" v-on:click="selectedStandard">Select</div>
                 </div>
             </div>
 
-            <div class="optionBox">
+            <div class="optionBox" v-bind:class="{ 'selected' : proSelected }">
                 <div>
                     <div class="title">Pro</div>
                     <div class="subtitle">All of Standard +</div>
@@ -33,11 +33,11 @@
                 <div>
                     <div class="price">$300</div>
                     <div class="description">Per User Per Year</div>
-                    <div class="selectedButton">Select</div>
+                    <div class="selectedButton" v-on:click="selectedPro">Select</div>
                 </div>
             </div>
 
-            <div class="optionBox">
+            <div class="optionBox" v-bind:class="{ 'selected' : enterpriseSelected }">
                 <div>
                     <div class="title">Enterprise</div>
                     <div class="subtitle">All of Pro +</div>
@@ -50,7 +50,7 @@
                 <div>
                     <div class="price">$600</div>
                     <div class="description">Per User Per Year</div>
-                    <div class="selectedButton">Select</div>
+                    <div class="selectedButton" v-on:click="selectedEnterprise">Select</div>
                 </div>
             </div>
         </div>
@@ -63,11 +63,50 @@
 
 <script>
 export default {
-    name: "Editions"
+    name: "Editions",
+
+    data: function() {
+        return {
+            standardSelected: false,
+            proSelected: false,
+            enterpriseSelected: false,
+        }
+    },
+
+
+    methods: {
+        selectedStandard: function() {
+            if (this.standardSelected === false) {
+                this.standardSelected = true;
+            } else {
+                this.standardSelected = false;
+            }
+        },
+
+        selectedPro: function() {
+            if (this.proSelected === false) {
+                this.proSelected = true;
+            } else {
+                this.proSelected = false;
+            }
+        },
+
+        selectedEnterprise: function() {
+            if (this.enterpriseSelected === false) {
+                this.enterpriseSelected = true;
+            } else {
+                this.enterpriseSelected = false;
+            }
+        },
+    }
 }
 </script>
 
 <style scoped>
+    .selected {
+        border: 2px solid #2F3241!important;
+    }
+
     .pageWrapper {
         display: flex;
         align-items: center;

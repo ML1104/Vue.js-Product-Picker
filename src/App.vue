@@ -5,6 +5,7 @@
     <Users></Users>
     <Years></Years>
     <Support></Support>
+    <Summary></Summary>
   </div>
 </template>
 
@@ -15,6 +16,7 @@ import Editions from './components/Editions.vue'
 import Users from './components/Users.vue'
 import Years from './components/Years.vue'
 import Support from './components/Support.vue'
+import Summary from './components/Summary.vue'
 
 export default {
   name: 'app',
@@ -25,6 +27,7 @@ export default {
     Users,
     Years,
     Support,
+    Summary,
   }
 }
 </script>
