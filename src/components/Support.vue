@@ -10,7 +10,7 @@
         <p></p>
 
         <div class="alignCenter">
-            <div class="optionBox" v-bind:class="{ 'selected' : need }">
+            <div class="optionBox" v-bind:class="{ 'selected' : need }" v-on:click="selectedNeed">
                 <div>
                     <div class="title">I would like Priority Support</div>
                 </div>
@@ -25,12 +25,12 @@
                 </div>
                 <div>
                     <div class="price">$149</div>
-                    <div class="description">Per User Per Year</div>
-                    <div class="selectedButton" v-on:click="selectedNeed">Select</div>
+                    <div class="description">Per Year</div>
+                    <div class="selectedButton">Select</div>
                 </div>
             </div>
 
-            <div class="optionBox" v-bind:class="{ 'selected' : needNot }">
+            <div class="optionBox" v-bind:class="{ 'selected' : needNot }" v-on:click="selectedNot">
                 <div>
                     <div class="title">I don't need Priority Support</div>
                 </div>
@@ -45,8 +45,8 @@
                 </div>
                 <div>
                     <div class="price">$0</div>
-                    <div class="description">Per User Per Year</div>
-                    <div class="selectedButton" v-on:click="selectedNot">Select</div>
+                    <div class="description">Per Year</div>
+                    <div class="selectedButton">Select</div>
                 </div>
             </div>
         </div>
@@ -83,8 +83,7 @@ export default {
             if (this.need === false) {
                 this.need = true;
                 this.needNot = false;
-            } else {
-                this.need = false;
+                this.$emit('prioritySupport')
             }
         },
 
@@ -92,8 +91,7 @@ export default {
             if (this.needNot === false) {
                 this.needNot = true;
                 this.need = false;
-            } else {
-                this.needNot = false;
+                this.$emit('standardSupport')
             }
         },
     }
@@ -130,6 +128,10 @@ export default {
         align-items: center;
         flex-direction: column;
         border: 2px solid lightgray;
+    }
+
+    .optionBox:hover {
+        cursor: pointer;
     }
 
     .title {

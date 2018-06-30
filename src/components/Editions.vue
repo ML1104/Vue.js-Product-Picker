@@ -9,14 +9,14 @@
                     <div class="title">Standard</div>
                 </div>
                 <div>
-                    <div class="description">
-                     Lorem ipsum dolor, sit amet consectetur adipisicing elit. Laboriosam, sequi tenetur delectus omnis quia magnam minus vero soluta fuga optio.
+                    <div class="product">
+                     Standard package containing the game engine
                     </div>
                 </div>
                 <div>
                     <div class="price">$150</div>
                     <div class="description">Per User Per Year</div>
-                    <div class="selectedButton" v-on:click="$emit('selectEdition', editions[0])">Select</div>
+                    <div class="selectedButton">Select</div>
                 </div>
             </div>
 
@@ -26,8 +26,8 @@
                     <div class="subtitle">All of Standard +</div>
                 </div>
                 <div>
-                    <div class="description">
-                     Lorem ipsum dolor, sit amet consectetur adipisicing elit. Laboriosam, sequi tenetur delectus omnis quia magnam minus vero soluta fuga optio.
+                    <div class="product">
+                     Everything in standard package including additional plugins and resources
                     </div>
                 </div>
                 <div>
@@ -43,8 +43,8 @@
                     <div class="subtitle">All of Pro +</div>
                 </div>
                 <div>
-                    <div class="description">
-                     Lorem ipsum dolor, sit amet consectetur adipisicing elit. Laboriosam, sequi tenetur delectus omnis quia magnam minus vero soluta fuga optio.
+                    <div class="product">
+                     Everything in pro package including maximum optimization and resources, as well as a step-by-step guide
                     </div>
                 </div>
                 <div>
@@ -81,15 +81,12 @@ export default {
 
 
     methods: {
-        // standardEvent: function() {
-        //     this.$emit('')
-        // },
-
         selectedStandard: function() {
             if (this.standardSelected === false) {
                 this.standardSelected = true;
                 this.proSelected = false;
                 this.enterpriseSelected = false;
+                this.$emit('selectStandardEdition');
             }
         },
 
@@ -98,6 +95,7 @@ export default {
                 this.proSelected = true;
                 this.standardSelected = false;
                 this.enterpriseSelected = false;
+                this.$emit('selectProEdition');
             }
         },
 
@@ -106,6 +104,7 @@ export default {
                 this.enterpriseSelected = true;
                 this.proSelected = false;
                 this.standardSelected = false;
+                this.$emit('selectEnterpriseEdition');
             }
         },
     }
@@ -155,6 +154,11 @@ export default {
 
     .description {
         width: 150px;
+    }
+
+    .product {
+        width: 150px;
+        height: 100px;
     }
 
     .price {

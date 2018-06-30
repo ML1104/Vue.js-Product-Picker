@@ -5,20 +5,18 @@
                 <div class="title">Order Summary</div>
                 <br>
                 <br>
-                <div class="totalPrice">{{ totalPrice }}</div>
+                <div class="totalPrice">${{ price + " +"}} ${{durationPrice + " +"}} ${{supportChoicePrice}}</div>
                 <div>(Total Excluding Tax)</div>
-                <div><span class="price">$0</span> Per User Per Year</div>
-                <div>Add Multi-User Discount</div>
-                <div>Add Multi-Year Discount</div>
+                <div><span class="price">${{ price }}</span> Per User Per Year</div>
             </div>
             <div>
                 <div class="title">Details</div>
                 <br>
                 <br>
-                <div>PRODUCT: <span v-on:selectEdition="standardEdition">{{ edition }}</span></div>
-                <div>QUANTITY: <span></span></div>
-                <div>DURATION: <span></span></div>
-                <div>SUPPORT: <span></span></div>
+                <div class="details">PRODUCT: <span>{{ edition }}</span></div>
+                <div class="details">QUANTITY: <span>{{ quantity }}</span></div>
+                <div class="details">DURATION: <span>{{ duration }}</span></div>
+                <div class="details">SUPPORT: <span>{{ support }}</span></div>
             </div>
             <div id="submit">
                 <div>ORDER</div>
@@ -32,20 +30,33 @@
 export default {
     name: "Summary",
 
+    props: {
+        edition: { required: true },
+        price: { required: true },
+        quantity: { required: true },
+        duration: { required: true },
+        durationPrice: { required: true },
+        support: { required: true },
+        supportChoicePrice: { required: true },
+    },
+
     data: function() {
         return {
-            totalPrice: "$",
             users: "",
             yearPrice: "",
             supportPrice: "",
-            edition: ""
+            discounted: "",
         } 
     },
 
+    mounted: function() {
+        this.checkPrice();
+    },
+
     methods: {
-        standardEdition: function() {
-            this.edition = "standard";
-        }
+        checkPrice: function() {
+            this.$emit('priceCheck');
+        },
     }
 }
 </script>
@@ -88,6 +99,10 @@ export default {
 
     .title {
         font-size: 20px;
+    }
+
+    span {
+        color: #9FEAF9;
     }
 
     .totalPrice {

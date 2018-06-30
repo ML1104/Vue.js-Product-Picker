@@ -8,13 +8,13 @@
                 <div class="title">Number of Users:</div>
                 <div id="input">
                     <div id="subtract" v-on:click="decrementUsers">-</div>
-                    <div id="counter">{{ userCount }}</div>
+                    <div id="counter">{{ users }}</div>
                     <div id="add" v-on:click="incrementUsers">+</div>
                 </div>
             </div>
             <div id="discount">
-                <div id="title2">Save <span id="save">10%</span> when you upgrade to <span id="numOfLicense">6 licenses</span></div>
-                <div id="upgrade" v-on:click="upgradeLicense">Upgrade to 6 licenses</div>
+                <div id="title2">Save <span id="save">10%</span> on your next purchase when you upgrade to <span id="numOfLicense">7 licenses</span></div>
+                <div id="upgrade" v-on:click="upgradeLicense">Upgrade to 7 licenses</div>
             </div>
         </div>
 
@@ -28,40 +28,59 @@
 export default {
     name: "Users",
 
+    props: {
+        users: { required: true }
+    },
+
     data: function() {
         return {
-            userCount: 1,
+            
         }
     },
 
+    mounted: function() {
+        this.numOfUsers()             
+    },
+
     methods: {
+        addUsers: function() {
+            this.$emit('addUser');
+        },
+
+        removeUsers: function() {
+            this.$emit('removeUser');
+        },
+
+        numOfUsers: function() {
+            this.$emit('userCount');
+        },
 
         upgradeLicense: function() {
-            this.userCount = 6;
-            if (this.userCount >= 6) {
+            this.users = 7;
+            if (this.users >= 6) {
                 document.getElementById('upgrade').style.display = "none";
-                document.getElementById('title2').innerHTML = "You now have 10% discount!";
+                document.getElementById('title2').innerHTML = "You now have 10% discount on your next purchase!";
             }
         },
 
         incrementUsers: function() {
-            this.userCount++;
-            if (this.userCount >= 6) {
+            this.$emit('addUser');
+            if (this.users >= 6) {
                 document.getElementById('upgrade').style.display = "none";
-                document.getElementById('title2').innerHTML = "You now have 10% discount!";
+                document.getElementById('title2').innerHTML = "You now have 10% discount on your next purchase!";
             }
         },
 
         decrementUsers: function() {
-            if (this.userCount < 2) {
+            if (this.users < 2) {
                 return;
             } else {
-                this.userCount--;
+                this.$emit('removeUser');
             }
 
-            if (this.userCount < 6) {
+            if (this.users < 8) {
                 document.getElementById('upgrade').style.display = "block";
-                document.getElementById('title2').innerHTML = 'Save <span id="save">10%</span> when you upgrade to <span id="numOfLicence">6 licences</span>';
+                document.getElementById('title2').innerHTML = 'Save <span id="save">10%</span>on your next purchase when you upgrade to <span id="numOfLicence">7 licences</span>';
             }
         }
     },

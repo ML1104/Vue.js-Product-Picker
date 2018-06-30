@@ -4,7 +4,7 @@
         <h1 class="sectionName">How Many Years?</h1>
 
         <div class="alignCenter">
-            <div class="optionBox" v-bind:class="{ 'selected' : oneSelected }">
+            <div class="optionBox" v-bind:class="{ 'selected' : oneSelected }" v-on:click="selectedOne">
                 <div>
                     <div class="title">1 Year</div>
                 </div>
@@ -16,11 +16,11 @@
                 <div>
                     <div class="price">$Free</div>
                     <div class="description">as default</div>
-                    <div class="selectedButton" v-on:click="selectedOne">Select</div>
+                    <div class="selectedButton">Select</div>
                 </div>
             </div>
 
-            <div class="optionBox" v-bind:class="{ 'selected' : twoSelected }">
+            <div class="optionBox" v-bind:class="{ 'selected' : twoSelected }" v-on:click="selectedTwo">
                 <div>
                     <div class="title">2 Years</div>
                 </div>
@@ -32,11 +32,11 @@
                 <div>
                     <div class="price">+ $74</div>
                     <div class="description">per license</div>
-                    <div class="selectedButton" v-on:click="selectedTwo">Select</div>
+                    <div class="selectedButton">Select</div>
                 </div>
             </div>
 
-            <div class="optionBox" v-bind:class="{ 'selected' : threeSelected }">
+            <div class="optionBox" v-bind:class="{ 'selected' : threeSelected }" v-on:click="selectedThree">
                 <div>
                     <div class="title">3 Years</div>
                 </div>
@@ -48,7 +48,7 @@
                 <div>
                     <div class="price">+ $149</div>
                     <div class="description">per license</div>
-                    <div class="selectedButton" v-on:click="selectedThree">Select</div>
+                    <div class="selectedButton">Select</div>
                 </div>
             </div>
         </div>
@@ -78,8 +78,7 @@ export default {
                 this.oneSelected = true;
                 this.twoSelected = false;
                 this.threeSelected = false;
-            } else {
-                this.oneSelected = false;
+                this.$emit('yearOne');
             }
         },
 
@@ -88,8 +87,7 @@ export default {
                 this.twoSelected = true;
                 this.oneSelected = false;
                 this.threeSelected = false;
-            } else {
-                this.twoSelected = false;
+                this.$emit('yearTwo');
             }
         },
 
@@ -98,8 +96,7 @@ export default {
                 this.threeSelected = true;
                 this.twoSelected = false;
                 this.oneSelected = false;
-            } else {
-                this.threeSelected = false;
+                this.$emit('yearThree');
             }
         },
     }
@@ -136,6 +133,10 @@ export default {
         align-items: center;
         flex-direction: column;
         border: 2px solid lightgray;
+    }
+
+    .optionBox:hover {
+        cursor: pointer;
     }
 
     .title {
