@@ -76,6 +76,8 @@ export default {
         selectedOne: function() {
             if (this.oneSelected === false) {
                 this.oneSelected = true;
+                this.twoSelected = false;
+                this.threeSelected = false;
             } else {
                 this.oneSelected = false;
             }
@@ -84,6 +86,8 @@ export default {
         selectedTwo: function() {
             if (this.twoSelected === false) {
                 this.twoSelected = true;
+                this.oneSelected = false;
+                this.threeSelected = false;
             } else {
                 this.twoSelected = false;
             }
@@ -92,6 +96,8 @@ export default {
         selectedThree: function() {
             if (this.threeSelected === false) {
                 this.threeSelected = true;
+                this.twoSelected = false;
+                this.oneSelected = false;
             } else {
                 this.threeSelected = false;
             }

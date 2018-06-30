@@ -127,6 +127,10 @@ export default {
         font-size: 30px;
     }
 
+    #discount {
+        width: 290px;
+    }
+
     #numOfLicense {
         font-weight: bold;
     }

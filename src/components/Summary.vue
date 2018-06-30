@@ -1,7 +1,7 @@
 <template>
     <div id="summaryBox">
         <div class="flexbox">
-            <div v-on:selectStandard="standardVersion">
+            <div>
                 <div class="title">Order Summary</div>
                 <br>
                 <br>
@@ -15,7 +15,7 @@
                 <div class="title">Details</div>
                 <br>
                 <br>
-                <div>PRODUCT: <span>{{ edition }}</span></div>
+                <div>PRODUCT: <span v-on:selectEdition="standardEdition">{{ edition }}</span></div>
                 <div>QUANTITY: <span></span></div>
                 <div>DURATION: <span></span></div>
                 <div>SUPPORT: <span></span></div>
@@ -38,14 +38,13 @@ export default {
             users: "",
             yearPrice: "",
             supportPrice: "",
-            edition: "",
+            edition: ""
         } 
     },
 
     methods: {
-        standardVersion: function() {
-            this.edition = "Standard"
-            this.totalPrice += 150;
+        standardEdition: function() {
+            this.edition = "standard";
         }
     }
 }

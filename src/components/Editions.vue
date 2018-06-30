@@ -4,7 +4,7 @@
         <h1 class="sectionName">Which Edition?</h1>
 
         <div class="alignCenter">
-            <div class="optionBox" v-bind:class="{ 'selected' : standardSelected }">
+            <div class="optionBox" v-bind:class="{ 'selected' : standardSelected }" v-on:click="selectedStandard">
                 <div>
                     <div class="title">Standard</div>
                 </div>
@@ -16,11 +16,11 @@
                 <div>
                     <div class="price">$150</div>
                     <div class="description">Per User Per Year</div>
-                    <div class="selectedButton" v-on:click="selectedStandard">Select</div>
+                    <div class="selectedButton" v-on:click="$emit('selectEdition', editions[0])">Select</div>
                 </div>
             </div>
 
-            <div class="optionBox" v-bind:class="{ 'selected' : proSelected }">
+            <div class="optionBox" v-bind:class="{ 'selected' : proSelected }" v-on:click="selectedPro">
                 <div>
                     <div class="title">Pro</div>
                     <div class="subtitle">All of Standard +</div>
@@ -33,11 +33,11 @@
                 <div>
                     <div class="price">$300</div>
                     <div class="description">Per User Per Year</div>
-                    <div class="selectedButton" v-on:click="selectedPro">Select</div>
+                    <div class="selectedButton">Select</div>
                 </div>
             </div>
 
-            <div class="optionBox" v-bind:class="{ 'selected' : enterpriseSelected }">
+            <div class="optionBox" v-bind:class="{ 'selected' : enterpriseSelected }" v-on:click="selectedEnterprise">
                 <div>
                     <div class="title">Enterprise</div>
                     <div class="subtitle">All of Pro +</div>
@@ -50,7 +50,7 @@
                 <div>
                     <div class="price">$600</div>
                     <div class="description">Per User Per Year</div>
-                    <div class="selectedButton" v-on:click="selectedEnterprise">Select</div>
+                    <div class="selectedButton">Select</div>
                 </div>
             </div>
         </div>
@@ -70,32 +70,42 @@ export default {
             standardSelected: false,
             proSelected: false,
             enterpriseSelected: false,
+
+            editions: [
+                "standard",
+                "Pro",
+                "Enterprise"
+            ]
         }
     },
 
 
     methods: {
+        // standardEvent: function() {
+        //     this.$emit('')
+        // },
+
         selectedStandard: function() {
             if (this.standardSelected === false) {
                 this.standardSelected = true;
-            } else {
-                this.standardSelected = false;
+                this.proSelected = false;
+                this.enterpriseSelected = false;
             }
         },
 
         selectedPro: function() {
             if (this.proSelected === false) {
                 this.proSelected = true;
-            } else {
-                this.proSelected = false;
+                this.standardSelected = false;
+                this.enterpriseSelected = false;
             }
         },
 
         selectedEnterprise: function() {
             if (this.enterpriseSelected === false) {
                 this.enterpriseSelected = true;
-            } else {
-                this.enterpriseSelected = false;
+                this.proSelected = false;
+                this.standardSelected = false;
             }
         },
     }
@@ -161,7 +171,7 @@ export default {
         border: 1px solid white;
     }
 
-    .selectedButton:hover {
+    .optionBox:hover {
         cursor: pointer;
     }
 </style>

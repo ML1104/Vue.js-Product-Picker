@@ -82,6 +82,7 @@ export default {
         selectedNeed: function() {
             if (this.need === false) {
                 this.need = true;
+                this.needNot = false;
             } else {
                 this.need = false;
             }
@@ -90,6 +91,7 @@ export default {
         selectedNot: function() {
             if (this.needNot === false) {
                 this.needNot = true;
+                this.need = false;
             } else {
                 this.needNot = false;
             }
